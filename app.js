@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const https = require('https');
 const request = require('request');
 
 const app = express();
@@ -16,9 +17,44 @@ app.post('/', function (req, res) {
   const lastName = req.body.lName;
   const email = req.body.email;
 
-  console.log(firstName, lastName, email);
+  const data = {
+    members: [
+      {
+        email_address: email,
+        status: 'subscribed',
+        merge_fields: {
+          FNAME: firstName,
+          LNAME: lastName,
+        },
+      },
+    ],
+  };
+
+  const jsonData = JSON.stringify(data);
+
+  const url = 'https://us20.api.mailchimp.com/3.0/lists/1ea70ba998';
+
+  const options = {
+    method: 'POST',
+    auth: 'vaishnavi:27419672d7f7848511474a96537b4eae-us20',
+  };
+
+  const request = https.request(url, options, function (response) {
+    response.on('data', function (data) {
+      console.log(JSON.parse(data));
+    });
+  });
+
+  request.write(jsonData);
+  request.end();
 });
 
 app.listen(3000, function (req, res) {
   console.log('Listening on port 3000...');
 });
+
+// API Key
+// 27419672d7f7848511474a96537b4eae-us20
+
+// Audience id or List id
+// 1ea70ba998
