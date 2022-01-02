@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
-const request = require('request');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static('public')); // To access local files on the system
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/signup.html');
@@ -41,12 +40,22 @@ app.post('/', function (req, res) {
 
   const request = https.request(url, options, function (response) {
     response.on('data', function (data) {
-      console.log(JSON.parse(data));
+      // console.log(JSON.parse(data));
+
+      if (response.statusCode === 200) {
+        res.sendFile(__dirname + '/success.html');
+      } else {
+        res.sendFile(__dirname + '/failure.html');
+      }
     });
   });
 
   request.write(jsonData);
   request.end();
+});
+
+app.post('/failure || /success', function (req, res) {
+  res.redirect('/');
 });
 
 app.listen(3000, function (req, res) {
