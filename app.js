@@ -58,7 +58,7 @@ app.post('/failure || /success', function (req, res) {
   res.redirect('/');
 });
 
-app.listen(3000, function (req, res) {
+app.listen(process.env.PORT || 3000, function (req, res) {
   console.log('Listening on port 3000...');
 });
 
