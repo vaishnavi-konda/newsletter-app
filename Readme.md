@@ -29,3 +29,64 @@ Change the required fields in signup.html
 👉 Create a folder named 'public' and move all the styles and images to that folder.
 
     app.use(express.static('public'));
+
+# Mailchimp api
+
+👉 Signup for mailchimp api
+
+    https://mailchimp.com/
+
+Docs for mailchimp api
+
+    https://mailchimp.com/help/about-api-keys/
+    https://mailchimp.com/developer/
+    https://mailchimp.com/developer/marketing/guides/quick-start
+
+Get an API key ---- Login -> Account -> Extras -> API Keys -> Create API Key
+
+    mailchimp/developer ---- Marketing API -> API Reference
+
+1.  Lists -> Batch sub/unsub list members
+    Requires List id and Members.
+
+    🔯Login -> Audience -> All Contacts -> Settings -> Audience name and campaign defaults
+
+    Note the unique Audience id or List id.
+
+    🔯Members is a JSON object in the form of string sent to the mailchimp subscribers list.
+
+2.  To sent data to the mailchimp API,
+
+    🔯data = {
+    🔯members:[
+    {
+    email_address: '',
+    status: 'subscribed',
+    merge_fields: {FNAME: '', LNAME:''}
+    }
+    ]
+    }
+
+merge_fields ---- Login -> Audience -> Settings -> Audience fields and MERGE tags
+
+    https://mailchimp.com/developer/marketing/docs/merge-fields/#structure
+
+X in the url is the last number in the api key (us-20).
+
+# To make a POST request using npm
+
+    import the 'request' module.
+
+    const request = require('request');
+
+https.request(url, options, function (response)
+
+🔯url = 'https://usX.api.mailchimp.com/3.0/lists/{list_id}'
+🔯options = {
+method: 'POST',
+user 'username:apikey'
+}
+
+### Check the subscribers under
+
+Login -> Audience -> All contacts
