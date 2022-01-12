@@ -61,9 +61,3 @@ app.post('/failure || /success', function (req, res) {
 app.listen(process.env.PORT || 3000, function (req, res) {
   console.log('Listening on port 3000...');
 });
-
-// API Key
-// 27419672d7f7848511474a96537b4eae-us20
-
-// Audience id or List id
-// 1ea70ba998
