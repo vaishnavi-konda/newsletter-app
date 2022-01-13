@@ -31,17 +31,16 @@ app.post('/', function (req, res) {
 
   const jsonData = JSON.stringify(data);
 
-  const url = 'https://us20.api.mailchimp.com/3.0/lists/1ea70ba998';
+  const url = 'https://usX.api.mailchimp.com/3.0/lists/<Audience id>';
+  // X in the url is the last 2 digits of your API key
 
   const options = {
     method: 'POST',
-    auth: 'vaishnavi:27419672d7f7848511474a96537b4eae-us20',
+    auth: 'username:<API key>',
   };
 
   const request = https.request(url, options, function (response) {
     response.on('data', function (data) {
-      // console.log(JSON.parse(data));
-
       if (response.statusCode === 200) {
         res.sendFile(__dirname + '/success.html');
       } else {
