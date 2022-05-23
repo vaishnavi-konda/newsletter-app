@@ -7,7 +7,7 @@ Newsletter signup using Nodejs, express js, Mailchimp API.
 # Install Dependencies
 
     npm init
-    npm install express body-parser
+    npm install
 
 # Run the app
 
@@ -16,4 +16,4 @@ Newsletter signup using Nodejs, express js, Mailchimp API.
 ## Usage
 
 1. Signup in the [Mailchimp](https://mailchimp.com/) website.
-2. Fill in your <API key> and <Audience id> in app.js
+2. Fill in your API key and Audience id in app.js
